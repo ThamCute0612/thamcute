@@ -34,8 +34,8 @@
     }
     .heart {
       position: absolute;
-      width: 8%; /* Kích thước trái tim (phần trăm) */
-      top: -20%; /* Vị trí ban đầu nằm trên đỉnh màn hình (phần trăm) */
+      width: 6vw; /* Kích thước trái tim */
+      top: -20%; /* Vị trí ban đầu nằm trên đỉnh màn hình */
       animation: heartAnimation 8s linear infinite; /* Hiệu ứng di chuyển trái tim */
       animation-duration: 6s; /* Thời gian chuyển động của mỗi trái tim */
       z-index: 1;
@@ -45,7 +45,20 @@
         transform: translate(0, 0) rotate(0deg);
       }
       100% {
-        transform: translate(100%, 100%) rotate(720deg); /* Di chuyển đến góc dưới bên phải và quay 2 vòng */
+        transform: translate(100vw, 100vh) rotate(720deg); /* Di chuyển đến góc dưới bên phải và quay 2 vòng */
+      }
+    }
+
+    /* CSS Media Queries */
+    @media only screen and (max-width: 768px) {
+      .heart {
+        width: 10vw; /* Kích thước trái tim thay đổi trên màn hình nhỏ hơn */
+      }
+      .floating-text {
+        font-size: 6vw; /* Kích thước chữ thay đổi trên màn hình nhỏ hơn */
+      }
+      h1#center-text {
+        font-size: 10vw; /* Kích thước chữ thay đổi trên màn hình nhỏ hơn */
       }
     }
   </style>
@@ -57,7 +70,7 @@
       const container = document.body;
       let texts = [];
       const colors = ['#ff99cc', '#66ff99', '#ffcc00', '#cc99ff', '#00ccff'];
-      const numberOfTexts = 20; // Số lượng chữ "Thắm Cute"
+      const numberOfTexts = 10; // Số lượng chữ "Thắm Cute"
 
       for (let i = 0; i < numberOfTexts; i++) {
         const fontSize = Math.floor(Math.random() * 4) + 2; // Kích thước font lớn hơn gấp 2 lần
@@ -66,7 +79,7 @@
         const text = document.createElement('span');
         text.textContent = 'Thắm Cute';
         text.classList.add('floating-text');
-        text.style.fontSize = fontSize * 8 + '%'; // Chuyển đổi kích thước font thành phần trăm
+        text.style.fontSize = fontSize + 'vw';
         text.style.color = color;
 
         text.style.zIndex = 1;
@@ -77,8 +90,8 @@
         let startX = Math.random() * 100;
         let startY = Math.random() * 100;
 
-        text.style.left = startX + '%';
-        text.style.top = startY + '%';
+        text.style.left = startX + 'vw';
+        text.style.top = startY + 'vh';
 
         function moveText() {
           const distance = speed * 1;
@@ -127,20 +140,21 @@
       }
 
       const heartImage = 'heart.png';
-      const heartCount = 30; // Số lượng trái tim thêm 4 lần
+      const heartCount = 48; // Số lượng trái tim tăng 4 lần
+
       for (let i = 0; i < heartCount; i++) {
         const heart = document.createElement('img');
         heart.src = heartImage;
         heart.classList.add('heart');
 
-        const randomSize = Math.random() * 3 + 1; // Kích thước trái tim ngẫu nhiên
+        const randomSize = Math.random() * 3 + 1; // Tạo kích thước ngẫu nhiên
         const randomPositionX = Math.random() * 100;
         const randomPositionY = Math.random() * 100;
         const randomRotate = Math.random() * 360;
 
-        heart.style.width = randomSize * 8 + '%'; // Kích thước trái tim (phần trăm)
-        heart.style.left = randomPositionX + '%';
-        heart.style.top = randomPositionY + '%';
+        heart.style.width = randomSize * 6 + 'vw'; // Kích thước trái tim
+        heart.style.left = randomPositionX + 'vw';
+        heart.style.top = randomPositionY + 'vh';
         heart.style.transform = `rotate(${randomRotate}deg)`;
 
         container.appendChild(heart);
